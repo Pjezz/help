@@ -149,4 +149,4 @@ function showToast(message, type = 'info') {
     toast.style.opacity = '0';
     toast.style.transform = 'translateX(100%)';
     setTimeout(() => toast.remove(), 300);
-  }, 3000);
+  }, 3000);ayuda
