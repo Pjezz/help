@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tus Recomendaciones de Autos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/recommendations.css') }}">
+</head>
+<body>
+  <!-- Barra de navegación superior -->
+  <nav class="top-navbar">
+    <div class="nav-content">
+      <div class="nav-left">
+        <div class="user-menu">
+          <button class="user-menu-btn" id="user-menu-btn">
+            <span class="user-icon">👤</span>
+            <span class="user-name" id="user-name">Usuario</span>
+            <span class="dropdown-arrow">▼</span>
+          </button>
+          <div class="user-dropdown" id="user-dropdown">
+            <a href="#" onclick="openProfileModal()">👤 Ver Perfil</a>
+            <a href="#" onclick="openFavoritesModal()">❤️ Favoritos</a>
+            <a href="#" onclick="toggleTheme()">🌙 Tema Oscuro</a>
+            <hr>
+            <a href="/logout" onclick="return confirmLogout()">🚪 Cerrar Sesión</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-center">
+        <h2>🎯 Tus Recomendaciones Personalizadas</h2>
+      </div>
+      <div class="nav-right">
+        <span class="step-indicator">✅ Completado</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>Tus Recomendaciones Personalizadas</h1>
+      <p class="subtitle">Basadas en tus preferencias y perfil demográfico</p>
+    </header>
+
+    <!-- Debug Info -->
+    <div class="debug-info">
+      <strong>Estado de Debug:</strong><br>
+      CSS: ✓ Cargado directamente<br>
+      JavaScript: <span id="js-status">⏳ Verificando...</span><br>
+      API: <span id="api-status">⏳ Verificando...</span><br>
+      Personalización: <span id="personalization-status">⏳ Verificando...</span>
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="loading" style="display: block;">
+      🔍 Analizando tus preferencias y generando recomendaciones personalizadas...
+    </div>
+
+    <!-- Error container -->
+    <div id="error-container" class="error-container" style="display: none;">
+    </div>
+
+    <!-- Summary section -->
+    <div id="summary-section" class="summary-section" style="display: none;">
+      <h3>📊 Resumen de tu búsqueda personalizada</h3>
+      <div id="summary-content"></div>
+    </div>
+
+    <!-- Recommendations container -->
+    <div id="recommendations-container" class="recommendations-container" style="display: none;">
+    </div>
+
+    <!-- Action buttons -->
+    <div class="action-buttons" id="action-buttons" style="display: none;">
+      <button onclick="restartProcess()" class="restart-btn">🔄 Empezar de Nuevo</button>
+      <button onclick="window.print()" class="print-btn">🖨️ Imprimir</button>
+      <button onclick="loadRecommendations()" class="retry-btn">🔁 Reintentar</button>
+      <button onclick="exportFavorites()" class="export-btn">📤 Exportar Favoritos</button>
+    </div>
+
+    <!-- Modal de detalles del auto -->
+    <div class="modal-overlay" id="carDetailModal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <button class="modal-close" onclick="closeCarDetailsModal()">&times;</button>
+          <div class="modal-car-title" id="modalCarTitle">Detalles del Vehículo</div>
+          <div class="modal-car-subtitle" id="modalCarSubtitle">Información completa</div>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <!-- Contenido se carga dinámicamente -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modales para perfil y favoritos -->
+  <div class="modal-overlay" id="profile-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Mi Perfil</h3>
+        <button class="modal-close" onclick="closeProfileModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="profile-modal-body">
+        <!-- Contenido se carga dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="favorites-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>Mis Favoritos</h3>
+        <button class="modal-close" onclick="closeFavoritesModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="favorites-modal-body">
+        <p>Cargando favoritos...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/recommendations.js') }}"></script>
+</body>
+</html>
